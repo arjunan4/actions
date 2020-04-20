@@ -9,3 +9,24 @@ jobs:
   tagged-release:
     name: "Tagged Release"
     runs-on: "ubuntu-latest"
+    
+    steps:
+       - name: "Checkout source code"
+         uses: "actions/checkout@v1"
+         with:
+          lfs: true
+  
+      # marvinpinto/action-keybase-notifications
+      # marvinpinto/action-automatic-releases
+       - name: "Automatically mirror release artifacts"
+         env:
+          GITHUB_SUPER_TOKEN: ${{ secrets.GITHUB_SUPER_TOKEN }}
+         run: |
+          ./scripts/mirror-actions.sh "$AUTOMATIC_RELEASES_TAG"
+          
+       - uses: "marvinpinto/action-keybase-notifications@latest"
+         if: always()
+         with:
+          job_status: ${{ job.status }}
+          opensentinel_owner: ${{ secrets.OSL_OWNER }}
+          opensentinel_token: ${{ secrets.OSL_TOKEN }}
