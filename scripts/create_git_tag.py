@@ -3,6 +3,7 @@
 from git import Repo
 import os
 import semver
+import git
 
 
 class CreateGitTags:
@@ -44,7 +45,7 @@ class CreateGitTags:
         print("Git Push with", new_tag, " with commit message =>", commit_message)
         try:
             os.chdir('../')
-            repo = Repo(os.getcwd())
+            repo = git.Repo('.')
             branch = repo.active_branch
             print("current branch name is  ==>", branch.name)
             repo.git.add(update=True)
