@@ -33,6 +33,10 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your projects.
 
-      - name: Display the path
-        run: python --version
-        shell: bash
+      - name: Run Python script
+        working-directory: ./scripts
+        run: python create_git_tag.py
+        shell: python
+
+      - name: Running Python script
+        
