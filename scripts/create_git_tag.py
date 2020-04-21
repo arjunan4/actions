@@ -25,7 +25,8 @@ class CreateGitTags:
         print("Required Git tag version", tag_list[0])
         print("Changing Directory to Original Path")
         os.chdir('./scripts')
-        print("Changing to python script directories", os.getcwd())
+        print("Changing to python script directories")
+        os.getcwd()
 
 
 hello = CreateGitTags()
