@@ -31,9 +31,20 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
-          echo test, and deploy your project.
+          echo test, and deploy your projects.
 
-      - name: Running a bash command
-        run:
-          shell: bash
-          working-directory: scripts
+      - name: Which Python Version
+        working-directory: ./scripts
+        run: which python
+        shell: bash
+
+      - name: Which Python3 Version
+        working-directory: ./scripts
+        run: pip3 install gitpython
+        shell: bash
+
+      - name: Run Python script
+        working-directory: ./scripts
+        run: python3 create_git_tag.py
+        shell: bash
+#
