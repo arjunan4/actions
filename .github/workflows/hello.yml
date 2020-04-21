@@ -34,6 +34,4 @@ jobs:
           echo test, and deploy your projects.
 
       - name: Run a bash script
-        run:
-          shell: bash
-          working-directory: scripts
+        run: echo New Bash, world!
