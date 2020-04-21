@@ -17,10 +17,12 @@ class CreateGitTags:
         tag_result = repo.git.tag(l=True)
         print('Tags results Object Type ==>', type(tag_result))
         print('Tags results are ==>', tag_result)
+        print('Fetching remote tags')
+        print(repo.remote().fetch('--tags'))
         print("Changing Directory to Original Path")
-
         os.chdir('./scripts')
         print("Changing to python script directories", os.getcwd())
+
 
 hello = CreateGitTags()
 hello.create_git_tag()
