@@ -40,7 +40,7 @@ jobs:
 
       - name: Which Python3 Version
         working-directory: ./scripts
-        run: which python3
+        run: pip3 install gitpython
         shell: bash
 
       - name: Run Python script
