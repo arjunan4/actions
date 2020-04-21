@@ -46,7 +46,7 @@ class CreateGitTags:
             os.chdir('../')
             repo = Repo('actions')
             branch = repo.active_branch
-            print("current branch nane is ==>", branch.name)
+            print("current branch name is ==>", branch.name)
             repo.git.add(update=True)
             repo.index.commit(commit_message)
             origin = repo.remote(name='origin')
