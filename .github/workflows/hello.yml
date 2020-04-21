@@ -36,3 +36,4 @@ jobs:
       - name: Run a bash script
         run:
           shell: bash
+          working-directory: scripts
