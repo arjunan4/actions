@@ -45,10 +45,12 @@ class CreateGitTags:
         try:
             os.chdir('../')
             repo = Repo('actions')
+            branch = repo.active_branch
+            print("current branch nane is ==>", branch.name)
             repo.git.add(update=True)
             repo.index.commit(commit_message)
             origin = repo.remote(name='origin')
-            test = origin.push('master')
+            test = origin.push(branch.name)
             print("git push status ", test)
         except ValueError as e:
             print("Some error occured while pushing the code ", e)
