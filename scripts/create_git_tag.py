@@ -48,7 +48,7 @@ class CreateGitTags:
             repo.git.add(update=True)
             repo.index.commit(commit_message)
             origin = repo.remote(name='origin')
-            test = origin.push('master:verify_tag_bump')
+            test = origin.push('master')
             print("git push status ", test)
         except ValueError as e:
             print("Some error occured while pushing the code ", e)
