@@ -44,7 +44,7 @@ class CreateGitTags:
         print("Git Push with", new_tag, " with commit message =>", commit_message)
         try:
             os.chdir('../')
-            repo = Repo(os.getcwd())
+            repo = Repo('actions')
             repo.git.add(update=True)
             repo.index.commit(commit_message)
             origin = repo.remote(name='origin')
