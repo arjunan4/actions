@@ -43,8 +43,8 @@ jobs:
         run: which python3
         shell: bash
 
-#      - name: Run Python script
-#        working-directory: ./scripts
-#        run: python create_git_tag.py
-#        shell: bash
+      - name: Run Python script
+        working-directory: ./scripts
+        run: python3 create_git_tag.py
+        shell: bash
 #
