@@ -37,7 +37,7 @@ jobs:
         working-directory: ./scripts
         run: pip3 install gitpython
 
-      -name: Install semver
+      - name: Install semver
         working-directory: ./scripts
         run: pip3 install semver
         shell: bash
