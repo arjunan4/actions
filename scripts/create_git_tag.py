@@ -46,7 +46,6 @@ class CreateGitTags:
         try:
             os.chdir('../')
             git = Repo.git
-            git.add('.')
             git.commit(commit_message)
             git.push(force=True)
             # branch = repo.active_branch
