@@ -34,5 +34,5 @@ jobs:
           echo test, and deploy your projects.
 
       - name: Display the path
-        run: echo $PATH
+        run: echo ${python --version}
         shell: bash
