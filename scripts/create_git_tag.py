@@ -43,7 +43,7 @@ class CreateGitTags:
 
     def git_push(self, new_tag, commit_message):
         print("Git Push with", new_tag, " with commit message =>", commit_message)
-        try
+        try:
             os.chdir('../')
             git = Repo.git
             git.add('.')
