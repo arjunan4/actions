@@ -47,11 +47,9 @@ class CreateGitTags:
             repo = Repo(os.getcwd())
             branch = repo.active_branch
             print("current branch name is  ==>", branch.name)
-            # repo.git.add(update=True)
-            # repo.index.commit(commit_message)
-            # origin = repo.remote(name='origin')
-            # test = origin.push(branch.name)
-            # print("git push status ", test)
+            repo.git.add(update=True)
+            repo.index.commit(commit_message)
+            repo.git.push(force=True)
         except ValueError as e:
             print("Some error occured while pushing the code ", e)
             raise
