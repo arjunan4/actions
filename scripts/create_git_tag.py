@@ -51,7 +51,7 @@ class CreateGitTags:
             repo.index.commit(commit_message)
             origin = repo.remote(name='origin')
             test = origin.push(branch.name)
-            # print("git push status ", test)
+            print("git push status ", test)
         except ValueError as e:
             print("Some error occured while pushing the code ", e)
             raise
