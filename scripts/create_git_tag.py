@@ -20,7 +20,7 @@ class CreateGitTags:
         print("Changing Directory to Original Path")
 
         os.chdir('./scripts')
-        print("Changing to python script directory", os.getcwd())
+        print("Changing to python script directories", os.getcwd())
 
 hello = CreateGitTags()
 hello.create_git_tag()
