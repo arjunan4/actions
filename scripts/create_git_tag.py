@@ -14,7 +14,11 @@ class CreateGitTags:
         # print("Git Repository Head details ==> ", repo.head.ref)
         # print("Git Repository Master details ==>", repo.heads.master)
         print("Git Repository tags details ==>", repo.tags)
+        tag_result = repo.git.tag(l=True)
+        print('Tags results Object Type ==>', type(tag_result))
+        print('Tags results are ==>', tag_result)
         print("Changing Directory to Original Path")
+
         os.chdir('./scripts')
         print("Changing to python script directory", os.getcwd())
 
