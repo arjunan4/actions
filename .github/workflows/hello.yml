@@ -33,5 +33,6 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your projects.
 
-      - name: Run a bash script
-        run: echo New Bash, world!
+      - name: Display the path
+        run: echo $PATH
+        shell: bash
