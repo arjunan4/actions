@@ -31,9 +31,4 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
-          echo test, and deploy your project.
-
-      - name: Running a bash command
-        run:
-          shell: bash
-          working-directory: scripts
+          echo test, and deploy your projects.
