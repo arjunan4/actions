@@ -35,6 +35,6 @@ jobs:
 
       - name: Run Python script
         working-directory: ./scripts
-        run: python create_git_tag.py
+        run: which python
         shell: bash
         
