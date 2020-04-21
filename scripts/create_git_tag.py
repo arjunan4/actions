@@ -43,14 +43,17 @@ class CreateGitTags:
 
     def git_push(self, new_tag, commit_message):
         print("Git Push with", new_tag, " with commit message =>", commit_message)
-        try:
+        try
             os.chdir('../')
-            repo = git.Repo('.')
-            branch = repo.active_branch
-            print("current branch name is  ==>", branch.name)
-            repo.git.add(update=True)
-            repo.index.commit(commit_message)
-            repo.git.push(force=True)
+            git = Repo.git
+            git.add('.')
+            git.commit(commit_message)
+            git.push(force=True)
+            # branch = repo.active_branch
+            # print("current branch name is  ==>", branch.name)
+            # repo.git.add(update=True)
+            # repo.index.commit(commit_message)
+            # repo.git.push(force=True)
         except ValueError as e:
             print("Some error occured while pushing the code ", e)
             raise
