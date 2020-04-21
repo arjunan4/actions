@@ -2,12 +2,15 @@
 
 from git import Repo
 import os
+import semver
+
 
 class CreateGitTags:
 
     def create_git_tag(self):
         os.chdir('../')
         repo = Repo(os.getcwd())
+        print("Repository name is =>", repo)
         print('===> Fetching remote tags===>')
         repo.remote().fetch('--tags')
         result = repo.git.tag(l=True)
@@ -24,9 +27,32 @@ class CreateGitTags:
         print("Git Tag results, after sorting in Descending Order => ", tag_list)
         print("Required Git tag version", tag_list[0])
         print("Changing Directory to Original Path")
-        os.chdir('./scripts')
-        print("Changing to python script directories")
-        os.getcwd()
+        # os.chdir('./scripts')
+        # print("Changing to python script directories")
+        # os.getcwd()
+
+        print("Current Git tag Version is =>", tag_list[0])
+        print("Bumping to new Version")
+
+        new_tag = str(semver.VersionInfo.parse(tag_list[0]).bump_minor())
+        print("minor bump version is =>", new_tag)
+        print("Verifying New tag version is Valid =>", semver.VersionInfo.isvalid(new_tag))
+        commit_message = "Bumping to " + new_tag + " new tag version"
+        self.git_push(new_tag, commit_message)
+
+    def git_push(self, new_tag, commit_message):
+        print("Git Push with", new_tag, " with commit message =>", commit_message)
+        try:
+            os.chdir('../')
+            repo = Repo(os.getcwd())
+            repo.git.add(update=True)
+            repo.index.commit(commit_message)
+            origin = repo.remote(name='origin')
+            test = origin.push()
+            print("git push status ", test)
+        except ValueError as e:
+            print("Some error occured while pushing the code ", e)
+            raise
 
 
 hello = CreateGitTags()

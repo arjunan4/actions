@@ -33,14 +33,13 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your projects.
 
-      - name: Which Python Version
-        working-directory: ./scripts
-        run: which python
-        shell: bash
-
-      - name: Which Python3 Version
+      - name: Install  gitPython
         working-directory: ./scripts
         run: pip3 install gitpython
+
+      -name: Install semver
+        working-directory: ./scripts
+        run: pip3 install semver
         shell: bash
 
       - name: Run Python script
