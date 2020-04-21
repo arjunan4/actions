@@ -44,7 +44,7 @@ class CreateGitTags:
         print("Git Push with", new_tag, " with commit message =>", commit_message)
         try:
             os.chdir('../')
-            repo = Repo('actions')
+            repo = Repo(os.getcwd())
             branch = repo.active_branch
             print("current branch name is  ==>", branch.name)
             # repo.git.add(update=True)

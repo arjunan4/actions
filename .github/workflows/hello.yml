@@ -42,6 +42,11 @@ jobs:
         run: pip3 install semver
         shell: bash
 
+      - name: Extract branch name
+          shell: bash
+          run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+          id: extract_branch
+
       - name: Run Python script
         working-directory: ./scripts
         run: python3 create_git_tag.py
