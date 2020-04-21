@@ -49,7 +49,7 @@ class CreateGitTags:
             print("current branch nane is ==>", branch.name)
             repo.git.add(update=True)
             repo.index.commit(commit_message)
-            # origin = repo.remote(name='origin')
+            origin = repo.remote(name='origin')
             # test = origin.push(branch.name)
             # print("git push status ", test)
         except ValueError as e:
