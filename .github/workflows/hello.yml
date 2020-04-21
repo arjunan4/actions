@@ -49,6 +49,7 @@ jobs:
 
       - name: Run Python script
         working-directory: ./scripts
-        run: python3 create_git_tag.py
+        run: echo "$extract_branch"
+#        run: python3 create_git_tag.py
         shell: bash
 #
