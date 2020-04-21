@@ -1,14 +1,22 @@
 #!/usr/bin/env python3
 
 import git
+from git import Repo
+import os
 
 class CreateGitTags:
 
     def create_git_tag(self):
-        print('Creating Git tag for the repository after PR is merged')
-        g = git.cmd.Git()
-        print('Git First command is', g)
-
+        os.chdir('../')
+        print("Changing to home directory", os.getcwd())
+        print('List directories', os.listdir())
+        repo = Repo(os.getcwd())
+        print("Git Repository Head details ==> ", repo.head.ref)
+        print("Git Repository Master details ==>", repo.heads.master)
+        print("Git Repository tags details ==>", repo.tags)
+        print("Changing Directory to Original Path")
+        os.chdir('./scripts')
+        print("Changing to python script directory", os.getcwd())
 
 hello = CreateGitTags()
 hello.create_git_tag()
