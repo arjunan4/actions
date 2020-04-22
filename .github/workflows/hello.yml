@@ -32,9 +32,8 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your projects
-          
+
       - name: Install semversion
-        working-directory: ./scripts
         run: npm install semver
 
       - name: Run Bash Script to bump Git tag
