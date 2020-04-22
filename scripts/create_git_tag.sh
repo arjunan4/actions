@@ -31,16 +31,16 @@ info "Git Log this repository ==> $log"
 
 if [ -n $tag ]; then
     info "Git Tag exists for this repository ==> $tag"
-    new_version=$(semver bump najor $tag)
+    new_version=$(`semver bump najor $tag`)
     info "New Git Tag is ==>  $new_version"
 else
     info "No Git Tag found for this repository"
 fi
 
 case "$log" in
-    *#major* ) new=$(semver bump major $tag);;
-    *#patch* ) new=$(semver bump patch $tag);;
-    * ) new=$(semver bump major $tag);;
+    *#major* ) new=$(`semver bump major $tag`);;
+    *#patch* ) new=$(`semver bump patch $tag`);;
+    * ) new=$(`semver bump major $tag`);;
 esac
 
 info "After case statement ==> $tag"
