@@ -18,6 +18,7 @@ git fetch --all --tags
 tag=$(git describe --tags `git rev-list --tags --max-count=1`)
 
 info "Git Tag ==> $tag"
+
 if [ -n "$tag" ]; then
     info "Git Tag exists for this repository ==> $tag"
 else
@@ -25,6 +26,8 @@ else
     tag="0.0.0"
 fi
 
+#set the IFS value
+OIFS=$IFS
 IFS='.'
 read -ra ADDR <<< "$tag"
 
@@ -35,7 +38,7 @@ if [ ${#ADDR[@]} = 3 ]; then
   current_major_ver=${ADDR[0]}
   current_minor_ver=${ADDR[1]}
   current_patch_ver=${ADDR[2]}
-  if [[ ${ADDR[0]} == *"v"* ]];then
+  if [[ ${ADDR[0]} == *"v"* ]]; then
     current_major_ver=${ADDR[0]#"v"}
   fi
   info "Major => $current_major_ver ; Minor => $current_minor_ver ; Patch => $current_patch_ver"
@@ -48,8 +51,7 @@ if [ ${#ADDR[@]} = 3 ]; then
     new_patch_ver="0"
     new_major_ver="$current_major_ver" 
   fi
-  new_tag_version="v$new_major_ver.$new_minor_ver.$new_patch_ver"
-  new_tag_version=$new_tag_version | sed -e 's/^[[:space:]]*//'
+  new_tag_version="$new_major_ver.$new_minor_ver.$new_patch_ver"
   info "New Tag version details => $new_tag_version" 
   info "Major => $new_major_ver ; Minor => $new_minor_ver ; Patch => $new_patch_ver"
 else
@@ -57,10 +59,25 @@ else
   exit 1
 fi
 
-commit_message="Upgrading Git Tag to $new_tag_version"
+#unset the IFS value
+IFS=$OIFS
+new_tag_version="$new_major_ver.$new_minor_ver.$new_patch_ver"
+commit_message="Bumping Git Tag to ${new_tag_version} version"
+info "bumping Git Tag to => ${new_tag_version} version with commit message => $commit_message"
+
+#adding Git Tag with new version
 set -e
-git commit -m "Upgrading Git Tag to $new_tag_version"
-git tag -a $new_tag_version
-git push -u origin master
-git push -u --tags
-set +e
+git tag -a $new_tag_version -m "Bumping Git Tag to ${new_tag_version} version"
+tag_create_status=$?
+info "Git Tag create status is => $tag_create_status"
+
+#push changes to remote branch
+if [ $tag_create_status -eq 0 ]; then
+  git push -q origin master
+  info "Git push origin master status => $?"
+  git push -q --tag
+  info "Git push tag status => $?"
+else
+  error "Git Tag creation failed"
+fi
+set +e  
