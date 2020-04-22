@@ -11,9 +11,9 @@ class CreateGitTags:
     def create_git_tag(self):
         os.chdir('../')
         repo = Repo(os.getcwd())
-        branch = repo.active_branch
+        # branch = repo.active_branch
         print("Repository name is =>", repo)
-        print("Active branch nane", branch)
+        # print("Active branch nane", branch)
         print('===> Fetching remote tags===>')
         repo.remote().fetch('--tags')
         result = repo.git.tag(l=True)
