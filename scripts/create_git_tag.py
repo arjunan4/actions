@@ -45,8 +45,11 @@ class CreateGitTags:
         print("Git Push with", new_tag, " with commit message =>", commit_message)
         try:
             os.chdir('../')
-            repo = Repo(os.getcwd())
-            print("Repo path is ==>", repo)
+            repo = git.Repo.clone_from('https://github.com/arjunan4/actions/')
+            repo.index.add()
+            repo.index.commit('checking remote')
+            print(repo.remotes.origin.push())
+            # print("Repo path is ==>", repo)
         except ValueError as e:
             print("Some error occured while pushing the code ", e)
             raise
