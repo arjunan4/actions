@@ -21,7 +21,7 @@ info "Git Latest Tag is ==> $tag"
 
 if [ -n $tag ]; then
     info "Git Tag exists for this repository ==> $tag"
-    new_version=$(semvertag bump minor)
+    new_version=$(semver bump minor $tag)
     info "New Git Tag is ==>  $new_version"
 else
     info "No Git Tag found for this repository"
