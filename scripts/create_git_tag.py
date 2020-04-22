@@ -11,7 +11,9 @@ class CreateGitTags:
     def create_git_tag(self):
         os.chdir('../')
         repo = Repo(os.getcwd())
+        branch = repo.active_branch
         print("Repository name is =>", repo)
+        print("Active branch nane", branch)
         print('===> Fetching remote tags===>')
         repo.remote().fetch('--tags')
         result = repo.git.tag(l=True)
@@ -39,7 +41,7 @@ class CreateGitTags:
         print("minor bump version is =>", new_tag)
         print("Verifying New tag version is Valid =>", semver.VersionInfo.isvalid(new_tag))
         commit_message = "Bumping to " + new_tag + " new tag version"
-        self.git_push(new_tag, commit_message)
+        # self.git_push(new_tag, commit_message)
 
     def git_push(self, new_tag, commit_message):
         print("Git Push with", new_tag, " with commit message =>", commit_message)
