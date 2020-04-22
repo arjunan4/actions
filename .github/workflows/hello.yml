@@ -34,7 +34,7 @@ jobs:
           echo test, and deploy your projects
 
       - name: Install semversion
-        run: npm install --save semver
+        run: sudo apt-get install -y node-semver
 
       - name: Verify npm path
         run: which npm
