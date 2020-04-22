@@ -12,7 +12,7 @@ function error {
   echo -e "\033[1;31m$1\033[m" >&2
 }
 
-
+git config --global user.name "arjunan4"
 # get latest tag
 git fetch --all --tags
 tag=$(git describe --tags `git rev-list --tags --max-count=1`)
