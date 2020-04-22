@@ -27,6 +27,7 @@ else
 fi
 
 info "Git Tag exists for this repository ==> $tag"
+info "Git Log this repository ==> $log"
 
 if [ -n $tag ]; then
     info "Git Tag exists for this repository ==> $tag"
