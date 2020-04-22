@@ -18,6 +18,15 @@ git fetch --all --tags
 tag=$(git describe --tags `git rev-list --tags --max-count=1`)
 info "Git Latest Tag is ==> $tag"
 
+if [ -z "$tag" ]
+then
+    log=$(git log --pretty=oneline)
+    tag=0.0.0
+else
+    log=$(git log $t..HEAD --pretty=oneline)
+fi
+
+info "Git Tag exists for this repository ==> $tag"
 
 if [ -n $tag ]; then
     info "Git Tag exists for this repository ==> $tag"
