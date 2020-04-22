@@ -31,7 +31,7 @@ info "Git Log this repository ==> $log"
 
 if [ -n $tag ]; then
     info "Git Tag exists for this repository ==> $tag"
-    new_version=$(semver bump minor $tag)
+    new_version=$(semver bump najor $tag)
     info "New Git Tag is ==>  $new_version"
 else
     info "No Git Tag found for this repository"
