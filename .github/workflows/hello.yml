@@ -34,10 +34,10 @@ jobs:
           echo test, and deploy your projects
 
       - name: Install semversion
-        run: npm install semver
+        run: npm install --save semver
 
       - name: Verify semversion path is correct
-        run: which python
+        run: which npm
 
       - name: Run Bash Script to bump Git tag
         working-directory: ./scripts
