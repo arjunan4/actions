@@ -36,8 +36,11 @@ jobs:
       - name: Install semversion
         run: npm install --save semver
 
-      - name: Verify semversion path is correct
+      - name: Verify npm path
         run: which npm
+
+      - name: Verify semverpath
+        run: which semver
 
       - name: Run Bash Script to bump Git tag
         working-directory: ./scripts
