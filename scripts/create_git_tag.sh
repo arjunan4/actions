@@ -75,6 +75,8 @@ info "Git Tag create status is => $tag_create_status"
 
 #push changes to remote branch
 if [ $tag_create_status -eq 0 ]; then
+  git add .
+  git commit -qm "test"
   git push --force origin "verify_tag_bump"
   info "Git push origin master status => $?"
   git push -q --tag
