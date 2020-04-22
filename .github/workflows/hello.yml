@@ -53,6 +53,10 @@ jobs:
 #         run: python3 create_git_tag.py
 #         shell: bash
 
+      - name: Install semversion
+        working-directory: ./scripts
+        run: npm install semver
+
       - name: Run Bash Script to bump Git tag
         working-directory: ./scripts
         run: bash create_git_tag.sh
