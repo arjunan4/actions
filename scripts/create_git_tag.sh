@@ -13,6 +13,8 @@ function error {
 }
 
 git config --global user.name "arjunan4"
+hello=$(git branch)
+info "Git Branch ==> $hello"
 # get latest tag
 git fetch --all --tags
 tag=$(git describe --tags `git rev-list --tags --max-count=1`)
@@ -73,7 +75,7 @@ info "Git Tag create status is => $tag_create_status"
 
 #push changes to remote branch
 if [ $tag_create_status -eq 0 ]; then
-  git push -q origin master
+  git push --force origin "verify_tag_bump"
   info "Git push origin master status => $?"
   git push -q --tag
   info "Git push tag status => $?"
