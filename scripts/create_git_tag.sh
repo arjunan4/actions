@@ -22,3 +22,4 @@ if [ $tag -eq 0] then
     info "No Git Tag found for this repository"
 else
     info "Git Tag exists for this repository"
+fi
