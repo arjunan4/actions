@@ -36,3 +36,11 @@ if [ -n $tag ]; then
 else
     info "No Git Tag found for this repository"
 fi
+
+case "$log" in
+    *#major* ) new=$(semver bump major $tag);;
+    *#patch* ) new=$(semver bump patch $tag);;
+    * ) new=$(semver bump minor $tag);;
+esac
+
+info "After case statement ==> $tag"
