@@ -62,5 +62,5 @@ set -e
 git commit -m "Upgrading Git Tag to $new_tag_version"
 git tag -a $new_tag_version
 git push -q origin master
-git push -q --tag
+git push -q --tags
 set +e
