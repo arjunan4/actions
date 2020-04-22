@@ -60,7 +60,7 @@ fi
 commit_message="Upgrading Git Tag to $new_tag_version"
 set -e
 git commit -m "Upgrading Git Tag to $new_tag_version"
-# # git tag $new_tag_version
-# # git push -q origin master
-# # git push -q --tag
+git tag $new_tag_version
+git push -q origin master
+git push -q --tag
 set +e
