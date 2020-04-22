@@ -26,3 +26,4 @@ if [ -n $tag ]; then
 else
     info "No Git Tag found for this repository"
 fi
+
