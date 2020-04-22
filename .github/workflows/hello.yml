@@ -39,9 +39,6 @@ jobs:
       - name: Verify npm path
         run: which npm
 
-      - name: Verify semverpath
-        run: which semver
-
       - name: Run Bash Script to bump Git tag
         working-directory: ./scripts
         run: bash create_git_tag.sh
