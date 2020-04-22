@@ -45,14 +45,8 @@ class CreateGitTags:
         print("Git Push with", new_tag, " with commit message =>", commit_message)
         try:
             os.chdir('../')
-            git = Repo.git
-            git.commit(commit_message)
-            git.push(force=True)
-            # branch = repo.active_branch
-            # print("current branch name is  ==>", branch.name)
-            # repo.git.add(update=True)
-            # repo.index.commit(commit_message)
-            # repo.git.push(force=True)
+            repo = Repo(os.getcwd())
+            print("Repo path is ==>", repo)
         except ValueError as e:
             print("Some error occured while pushing the code ", e)
             raise
