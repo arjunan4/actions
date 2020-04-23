@@ -64,7 +64,7 @@ fi
 #unset the IFS value
 IFS=$OIFS
 new_tag_version="$new_major_ver.$new_minor_ver.$new_patch_ver"
-commit_message="Bumping Git Tag to ${new_tag_version} version"
+commit_message="Automated Script Bumping Git Tag version to ${new_tag_version} version"
 info "bumping Git Tag to => ${new_tag_version} version with commit message => $commit_message"
 
 #adding Git Tag with new version
