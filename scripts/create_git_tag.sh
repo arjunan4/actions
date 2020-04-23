@@ -92,9 +92,9 @@ curl_response=$(curl -s -X POST $github_repo_url -H "Authorization: token $GITHU
 
 info "Output Refs -> $curl_response"
 
-# output_refs=$(echo "$curl_response" | jq '.ref')
-# info "Output Refs -> $ref"
+output_refs=$(echo "$curl_response" | jq '.ref')
+info "Output Refs -> $ref"
 
-# output_sha=$(echo "$curl_response" | jq '.object.sha')
-# info "output_sha -> $ref"
+output_sha=$(echo "$curl_response" | jq '.object.sha')
+info "output_sha -> $ref"
 
