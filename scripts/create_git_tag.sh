@@ -83,11 +83,22 @@ info "Repo name => $repo"
 post_data()
 { 
   cat <<EOF 
-  {
-    "ref": "refs/tags/$new_tag_version", "sha": "$commit"
-  } 
+{
+  "ref": "refs/tags/$new_tag_version", 
+  "sha": "$commit"
+} 
 EOF
 }
+
+# generate_post_data()
+# {
+#   cat <<EOF
+# {
+#   "ref": "refs/tags/$new_tag_version",
+#   "sha": "$commit"
+# }
+# EOF
+# }
 
 info "post data params ${post_data())"
 
