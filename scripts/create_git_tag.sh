@@ -82,7 +82,10 @@ info "Repo name => $repo"
 #function to form parameters for curl command
 post_data()
 { 
-  cat <<EOF { "ref": "refs/tags/$new_tag_version", "sha": "$commit" } 
+  cat <<EOF 
+  {
+    "ref": "refs/tags/$new_tag_version", "sha": "$commit"
+  } 
 EOF
 }
 
