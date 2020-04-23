@@ -89,9 +89,9 @@ EOF
 #posting a curl request
 curl_response=$(curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" -d "$(post_data)")
 
-output_refs=$(echo "$curl_post_response" | jq '.ref')
+output_refs=$(echo "$curl_response" | jq '.ref')
 info "Output Refs -> $ref"
 
-output_sha=$(echo "$curl_post_response" | jq '.object.sha')
+output_sha=$(echo "$curl_response" | jq '.object.sha')
 info "Output Refs -> $ref"
 
