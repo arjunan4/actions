@@ -96,14 +96,18 @@ info "Repo => $repo"
 info "Repo Owner => $REPO_OWNER"
 info "Git hub token $GITHUB_TOKEN"
 
-
+tag_hash="{"ref": "refs/tags/$new_tag_version","sha": "$commit"}"
 
 # POST a new ref to repo via Github API
+# curl -s -X POST https://api.github.com/repos/$REPO_OWNER/$repo/git/refs \
+# -H "Authorization: token $GITHUB_TOKEN" \
+# -d @- << EOF
+# {
+#   "ref": "refs/tags/$new_tag_version",
+#   "sha": "$commit"
+# }
+# EOF
+
 curl -s -X POST https://api.github.com/repos/$REPO_OWNER/$repo/git/refs \
 -H "Authorization: token $GITHUB_TOKEN" \
--d @ << EOF
-{
-  "ref": "refs/tags/$new_tag_version",
-  "sha": "$commit"
-}
-EOF
+-d @- tag_hash
