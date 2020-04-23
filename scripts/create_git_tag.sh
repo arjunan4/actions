@@ -137,16 +137,16 @@ EOF
 token="Authorization: token $GITHUB_TOKEN"
 info "Git Hub Token $(get_github_token)"
 info "First Attempt"
-curl_post_response=$(curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" -d "$(generate_post_data)")
+curl_post_response=$(curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" -d "$(generate_post_data)" | jq '.ref')
 
 info "First Attempt Result $?"
 
 info "Curl post response is => $curl_post_response"
 
-ref=$curl_post_response | jq '.ref'
+# ref=$curl_post_response | jq '.ref'
 
-info "Ref -> $ref"
+# info "Ref -> $ref"
 
-sha=cat $curl_post_response | jq -r '.object.sha'
+# sha=cat $curl_post_response | jq -r '.object.sha'
 
-info "sha -> $sha"
+# info "sha -> $sha"
