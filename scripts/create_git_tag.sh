@@ -118,7 +118,32 @@ info "Git tag_hash $tag_hash"
 # }
 # EOF
 
+info "First Attempt"
+curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" \
+-d $tag_hash
 
+info "First Attempt Result $?"
+
+info "Second Attempt"
+curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" \
+-d @ $tag_hash
+
+info "Second Attempt Result $?"
+
+info "Third Attempt"
+curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" \
+-d @- $tag_hash
+
+info "Third Attempt Result $?"
+
+
+info "Fourth Attempt"
+curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" \
+-d @- < $tag_hash 
+
+info "Fourth Attempt Result $?"
+
+info "Fifth Attempt"
 curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" \
 -d @- << EOF
 {
@@ -126,4 +151,7 @@ curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" \
   "sha": "$commit"
 }
 EOF
+
+info "Fifth Attempt Result $?"
+
 info "CURL output's $?"
