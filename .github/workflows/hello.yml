@@ -38,6 +38,11 @@ jobs:
 
       # - name: Verify npm path
       #   run: which npm
+      
+      - name: Verify Jq installed
+        working-directory: ./scripts
+        run: which jq
+        shell: bash
 
       - name: Run Bash Script to bump Git tag
         working-directory: ./scripts
