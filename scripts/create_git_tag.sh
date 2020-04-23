@@ -87,7 +87,7 @@ EOF
 }
 
 
-#posting a curl requests s
+#posting a curl requests dds
 # curl_response=$(curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" -d "$(post_data)")
 
 # info "Output Refs -> $curl_response"
