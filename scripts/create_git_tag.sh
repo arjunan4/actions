@@ -89,15 +89,16 @@ post_data()
 EOF
 }
 
+info "post data params ${post_data())"
 
 #posting a curl requestshyff
-curl_response=$(curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" -d "$(post_data)")
+# curl_response=$(curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" -d "$(post_data)")
 
-info "Output Refs -> $curl_response"
+# info "Output Refs -> $curl_response"
 
-output_refs=$(echo "$curl_response" | jq '.ref')
-info "Output Refs -> $ref"
+# output_refs=$(echo "$curl_response" | jq '.ref')
+# info "Output Refs -> $ref"
 
-output_sha=$(echo "$curl_response" | jq '.object.sha')
-info "output_sha -> $ref"
+# output_sha=$(echo "$curl_response" | jq '.object.sha')
+# info "output_sha -> $ref"
 
