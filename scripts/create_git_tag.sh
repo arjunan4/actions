@@ -135,7 +135,7 @@ EOF
 # EOF
 
 token="Authorization: token $GITHUB_TOKEN"
-info "Git Hub Token $token"
+info "Git Hub Token $(get_github_token)"
 info "First Attempt"
 curl -s -X POST $github_repo_url -H get_github_token -d "$(generate_post_data)"
 
