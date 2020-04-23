@@ -119,5 +119,5 @@ info "Git tag_hash $tag_hash"
 # EOF
 
 
-curl_output=curl -s -X POST $github_repo_url -H $github_token_params -d $tag_hash
-info "CURL output $curl_output"
+curl -s -X POST $github_repo_url -H $github_token_params -d $tag_hash
+info "CURL output $?"
