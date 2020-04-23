@@ -115,7 +115,7 @@ info "post data params"
 info "First Attempt"
 #posting a curl requestshyff
 # curl_response=$(curl -s -X POST $github_repo_url -H  -d "$(post_data)")
-curl_response=$(curl -H "Authorization: token $GITHUB_TOKEN" -d "$(post_data)" $github_repo_url)
+curl_response=$(curl -s -X -H "Authorization: token $GITHUB_TOKEN" -d "$(post_data)" $github_repo_url)
 
 info "First Attempt result -> $curl_response"
 
