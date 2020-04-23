@@ -115,6 +115,14 @@ generate_post_data()
 EOF
 }
 
+get_github_token()
+{
+  cat << EOF
+{
+  "Authorization" : "token $GITHUB_TOKEN"
+}
+EOF
+}
 
 # POST a new ref to repo via Github API
 # curl -s -X POST https://api.github.com/repos/$REPO_OWNER/$repo/git/refs \
@@ -127,8 +135,7 @@ EOF
 # EOF
 
 info "First Attempt"
-curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" \
--d "$(generate_post_data)"
+curl -s -X POST $github_repo_url -H "$(get_github_token)" -d "$(generate_post_data)"
 
 info "First Attempt Result $?"
 
