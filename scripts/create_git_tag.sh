@@ -101,7 +101,7 @@ info "Git hub token $GITHUB_TOKEN"
 # POST a new ref to repo via Github API
 curl -s -X POST https://api.github.com/repos/$REPO_OWNER/$repo/git/refs \
 -H "Authorization: token $GITHUB_TOKEN" \
--d @- << EOF
+-d @ << EOF
 {
   "ref": "refs/tags/$new_tag_version",
   "sha": "$commit"
