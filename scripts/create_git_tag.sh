@@ -101,9 +101,30 @@ else
   exit 1
 fi
 
-
 ref=$(echo "$curl_response" | jq  -r '.ref')
 info "Ref -> $ref"
 
+#set the IFS value
+OIFS=$IFS
+IFS='/'
+read -ra ref_split <<< "$ref"
+
+#unset the IFS value
+IFS=$OIFS
+info "Array length ==> ${#ref_split[@]}"
+for i in "${ref_split[@]}"
+do
+  info "$i"
+  if [ $i = $new_tag_version ]; then
+    info "New Tag Version Committed successfully in remote"
+    break
+  fi
+done
+
+info "for loop finished"
 sha=$(echo "$curl_response" | jq -r '.object.sha')
 info "sha -> $sha"
+
+if [ $sha = $commit ]; then
+  info "Commit SHA found successfully"
+fi
