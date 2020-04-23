@@ -90,15 +90,20 @@ EOF
 }
 info "Data Parameters => $(generate_post_data)"
 
-#
-curl_post_response=$(curl -s -H "Authorization: token $GITHUB_TOKEN" -d "$(generate_post_data)" $github_repo_url)
+#using CURL post the below request to add git tag to repository
+curl_response=$(curl -s -H "Authorization: token $GITHUB_TOKEN" -d "$(generate_post_data)" $github_repo_url)
 
-info "First Attempt Result $?"
+info "Curl response => $curl_response"
+if [ $? -eq 0 ]; then
+  info "Curl request is success"
+else
+  info "Curl request Failed"
+  exit 1
+fi
 
-info "Curl post response is => $curl_post_response"
 
-ref=$(echo "$curl_post_response" | jq  -r '.ref')
+ref=$(echo "$curl_response" | jq  -r '.ref')
 info "Ref -> $ref"
 
-sha=$(echo "$curl_post_response" | jq -r '.object.sha')
+sha=$(echo "$curl_response" | jq -r '.object.sha')
 info "sha -> $sha"
