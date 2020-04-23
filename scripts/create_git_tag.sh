@@ -13,7 +13,7 @@ function error {
 }
 
 # get latest tag
-#git fetch --all --tags
+git fetch -q --all --tags
 tag=$(git describe --tags `git rev-list --tags --max-count=1`)
 
 if [ -n "$tag" ]; then
