@@ -102,10 +102,18 @@ info "Github Repo URL => $github_repo_url"
 github_token_params=
 info "Github token parameters => $github_token_params"
 
-tag_hash={"ref": "refs/tags/$new_tag_version", "sha": "$commit"}
+tag_hash="{"ref": "refs/tags/$new_tag_version", "sha": "$commit"}"
 info "Git tag_hash $tag_hash"
 
-
+generate_post_data()
+{
+  cat <<EOF
+{
+  "ref": "refs/tags/$new_tag_version",
+  "sha": "$commit"
+}
+EOF
+}
 
 
 # POST a new ref to repo via Github API
@@ -120,7 +128,7 @@ info "Git tag_hash $tag_hash"
 
 info "First Attempt"
 curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" \
--d $tag_hash
+-d "$(generate_post_data)"
 
 info "First Attempt Result $?"
 
