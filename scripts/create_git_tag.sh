@@ -136,6 +136,6 @@ EOF
 token="Authorization: token $GITHUB_TOKEN"
 info "Git Hub Token $token"
 info "First Attempt"
-curl -s -X POST $github_repo_url -H $token -d "$(generate_post_data)"
+curl -s -X POST $github_repo_url -H "$($token)" -d "$(generate_post_data)"
 
 info "First Attempt Result $?"
