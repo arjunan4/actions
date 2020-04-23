@@ -133,9 +133,9 @@ EOF
 #   "sha": "$commit"
 # }
 # EOF
-
-info "Git Hub Token $(get_github_token)"
+token="Authorization: token $GITHUB_TOKEN"
+info "Git Hub Token $token"
 info "First Attempt"
-curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" -d "$(generate_post_data)"
+curl -s -X POST $github_repo_url -H $token -d "$(generate_post_data)"
 
 info "First Attempt Result $?"
