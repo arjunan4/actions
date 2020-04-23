@@ -143,7 +143,7 @@ info "First Attempt Result $?"
 
 info "Curl post response is => $curl_post_response"
 
-ref=$(cat $curl_post_response | jq -r '.ref')
+ref=$($curl_post_response | jq '.ref')
 
 info "Ref -> $ref"
 
