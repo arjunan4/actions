@@ -94,6 +94,8 @@ repo=$(basename $remote .git)
 
 info "Repo => $repo"
 info "Repo Owner => $REPO_OWNER"
+info "Git hub token $GITHUB_TOKEN"
+
 
 
 # POST a new ref to repo via Github API
