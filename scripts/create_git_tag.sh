@@ -64,27 +64,7 @@ fi
 #unset the IFS value
 IFS=$OIFS
 new_tag_version="$new_major_ver.$new_minor_ver.$new_patch_ver"
-commit_message="Bumping Git Tag version to ${new_tag_version} version"
-info "bumping Git Tag to => ${new_tag_version} version with commit message => $commit_message"
-
-#adding Git Tag with new version
-# set -e
-# git tag -a $new_tag_version -m "Bumping Git Tag to ${new_tag_version} version"
-# tag_create_status=$?
-# info "Git Tag create status is => $tag_create_status"
-
-# #push changes to remote branch
-# if [ $tag_create_status -eq 0 ]; then
-#   git add .
-#   git commit -qm "test"
-#   git push --force origin "verify_tag_bump"
-#   info "Git push origin master status => $?"
-#   git push -q --tag
-#   info "Git push tag status => $?"
-# else
-#   error "Git Tag creation failed"
-# fi
-# set +e  
+info "bumping Git Tag to => ${new_tag_version} new version"
 
 commit=$(git rev-parse HEAD)
 info "commit message SHA => $commit"
@@ -92,18 +72,9 @@ info "commit message SHA => $commit"
 remote=$(git config --get remote.origin.url)
 repo=$(basename $remote .git)
 
-info "Repo => $repo"
-info "Repo Owner => $REPO_OWNER"
-info "Git hub token $GITHUB_TOKEN"
 
 github_repo_url="https://api.github.com/repos/$REPO_OWNER/$repo/git/refs"
 info "Github Repo URL => $github_repo_url"
-
-github_token_params=
-info "Github token parameters => $github_token_params"
-
-tag_hash="{"ref": "refs/tags/$new_tag_version", "sha": "$commit"}"
-info "Git tag_hash $tag_hash"
 
 generate_post_data()
 {
@@ -115,27 +86,6 @@ generate_post_data()
 EOF
 }
 
-get_github_token()
-{ 
-  cat <<EOF
-  {
-    "Authorization" : "token $GITHUB_TOKEN"
-  }
-EOF
-}
-
-# POST a new ref to repo via Github API
-# curl -s -X POST https://api.github.com/repos/$REPO_OWNER/$repo/git/refs \
-# -H "Authorization: token $GITHUB_TOKEN" \
-# -d @- << EOF
-# {
-#   "ref": "refs/tags/$new_tag_version",
-#   "sha": "$commit"
-# }
-# EOF
-
-token="Authorization: token $GITHUB_TOKEN"
-info "Git Hub Token $(get_github_token)"
 info "First Attempt"
 curl_post_response=$(curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" -d "$(generate_post_data)")
 
