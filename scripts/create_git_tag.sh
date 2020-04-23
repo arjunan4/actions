@@ -79,6 +79,13 @@ remote=$(git config --get remote.origin.url)
 repo=$(basename $remote .git)
 info "Repo name => $repo"
 
+#function to form parameters for curl command
+post_data()
+{ 
+  cat <<EOF { "ref": "refs/tags/$new_tag_version", "sha": "$commit" } 
+EOF
+}
+
 #posting a curl request
 curl_response=$(curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" -d "$(post_data)")
 
@@ -88,8 +95,3 @@ info "Output Refs -> $ref"
 output_sha=$(echo "$curl_post_response" | jq '.object.sha')
 info "Output Refs -> $ref"
 
-post_data()
-{ 
-  cat <<EOF { "ref": "refs/tags/$new_tag_version", "sha": "$commit" } 
-EOF
-}
