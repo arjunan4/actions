@@ -68,20 +68,34 @@ commit_message="Bumping Git Tag to ${new_tag_version} version"
 info "bumping Git Tag to => ${new_tag_version} version with commit message => $commit_message"
 
 #adding Git Tag with new version
-set -e
-git tag -a $new_tag_version -m "Bumping Git Tag to ${new_tag_version} version"
-tag_create_status=$?
-info "Git Tag create status is => $tag_create_status"
+# set -e
+# git tag -a $new_tag_version -m "Bumping Git Tag to ${new_tag_version} version"
+# tag_create_status=$?
+# info "Git Tag create status is => $tag_create_status"
 
-#push changes to remote branch
-if [ $tag_create_status -eq 0 ]; then
-  git add .
-  git commit -qm "test"
-  git push --force origin "verify_tag_bump"
-  info "Git push origin master status => $?"
-  git push -q --tag
-  info "Git push tag status => $?"
-else
-  error "Git Tag creation failed"
-fi
-set +e  
+# #push changes to remote branch
+# if [ $tag_create_status -eq 0 ]; then
+#   git add .
+#   git commit -qm "test"
+#   git push --force origin "verify_tag_bump"
+#   info "Git push origin master status => $?"
+#   git push -q --tag
+#   info "Git push tag status => $?"
+# else
+#   error "Git Tag creation failed"
+# fi
+# set +e  
+
+# get repo name from git
+remote=$(git config --get remote.origin.url)
+repo=$(basename $remote .git)
+
+# POST a new ref to repo via Github API
+curl -s -X POST https://api.github.com/repos/$REPO_OWNER/$repo/git/refs \
+-H "Authorization: token $GITHUB_TOKEN" \
+-d @- << EOF
+{
+  "ref": "refs/tags/$new_tag_version",
+  "sha": "$commit_message"
+}
+EOF
