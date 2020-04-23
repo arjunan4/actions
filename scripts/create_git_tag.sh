@@ -120,4 +120,4 @@ info "Git tag_hash $tag_hash"
 
 
 curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" -d @- tag_hash
-info "CURL output $?"
+info "CURL output's $?"
