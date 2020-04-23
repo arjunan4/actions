@@ -87,10 +87,10 @@ EOF
 }
 
 
-#posting a curl requests ddsdfdsfsdfgdfgsfsfs
-# curl_response=$(curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" -d "$(post_data)")
+#posting a curl requests 
+curl_response=$(curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" -d "$(post_data)")
 
-# info "Output Refs -> $curl_response"
+info "Output Refs -> $curl_response"
 
 # output_refs=$(echo "$curl_response" | jq '.ref')
 # info "Output Refs -> $ref"
