@@ -86,9 +86,15 @@ info "bumping Git Tag to => ${new_tag_version} version with commit message => $c
 # fi
 # set +e  
 
+commit=$(git rev-parse HEAD)
+info "commit message SHA => $commit"
 # get repo name from git
 remote=$(git config --get remote.origin.url)
 repo=$(basename $remote .git)
+
+info "Repo => $repo"
+info "Repo Owner => $REPO_OWNER"
+
 
 # POST a new ref to repo via Github API
 curl -s -X POST https://api.github.com/repos/$REPO_OWNER/$repo/git/refs \
@@ -96,6 +102,6 @@ curl -s -X POST https://api.github.com/repos/$REPO_OWNER/$repo/git/refs \
 -d @- << EOF
 {
   "ref": "refs/tags/$new_tag_version",
-  "sha": "$commit_message"
+  "sha": "$commit"
 }
 EOF
