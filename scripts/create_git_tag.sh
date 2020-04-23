@@ -103,9 +103,9 @@ EOF
 info "post data params"
 
 #posting a curl requestshyff
-curl_response=$(curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" -d "$(post_data)")
+# curl_response=$(curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" -d "$(post_data)")
 
-info "Output Refs -> $curl_response"
+# info "Output Refs -> $curl_response"
 
 # output_refs=$(echo "$curl_response" | jq '.ref')
 # info "Output Refs -> $ref"
@@ -113,3 +113,11 @@ info "Output Refs -> $curl_response"
 # output_sha=$(echo "$curl_response" | jq '.object.sha')
 # info "output_sha -> $ref"
 
+curl -s -X POST https://api.github.com/repos/$REPO_OWNER/$repo/git/refs \
+-H "Authorization: token $GITHUB_TOKEN" \
+-d @- << EOF
+{
+  "ref": "refs/tags/$new_tag_version",
+  "sha": "$commit"
+}
+EOF
