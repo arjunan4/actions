@@ -86,17 +86,19 @@ generate_post_data()
 EOF
 }
 
+hello=generate_post_data
+info "Data Parameters => $(generate_post_data)"
 info "First Attempt"
 curl_post_response=$(curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" -d "$(generate_post_data)")
 
-info "First Attempt Result $?"
+# info "First Attempt Result $?"
 
-info "Curl post response is => $curl_post_response"
+# info "Curl post response is => $curl_post_response"
 
-ref=$(echo "$curl_post_response" | jq  -r '.ref')
+# ref=$(echo "$curl_post_response" | jq  -r '.ref')
 
-info "Ref -> $ref"
+# info "Ref -> $ref"
 
-sha=$(echo "$curl_post_response" | jq -r '.object.sha')
+# sha=$(echo "$curl_post_response" | jq -r '.object.sha')
 
-info "sha -> $sha"
+# info "sha -> $sha"
