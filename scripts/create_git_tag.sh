@@ -82,8 +82,8 @@ info "Repo name => $repo"
 #function to form parameters for curl command
 post_data()
 { 
-  cat <<EOF 
-{
+  cat <<EOF
+  {
   "ref": "refs/tags/$new_tag_version", 
   "sha": "$commit"
 } 
@@ -100,12 +100,12 @@ EOF
 # EOF
 # }
 
-info "post data params ${post_data())"
+info "post data params"
 
 #posting a curl requestshyff
-# curl_response=$(curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" -d "$(post_data)")
+curl_response=$(curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" -d "$(post_data)")
 
-# info "Output Refs -> $curl_response"
+info "Output Refs -> $curl_response"
 
 # output_refs=$(echo "$curl_response" | jq '.ref')
 # info "Output Refs -> $ref"
