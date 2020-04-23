@@ -66,16 +66,19 @@ IFS=$OIFS
 new_tag_version="$new_major_ver.$new_minor_ver.$new_patch_ver"
 info "bumping Git Tag to => ${new_tag_version} new version"
 
+#get commit SHA for tagging
 commit=$(git rev-parse HEAD)
 info "commit message SHA => $commit"
+
 # get repo name from git
 remote=$(git config --get remote.origin.url)
 repo=$(basename $remote .git)
 
-
+#forming github repo URL
 github_repo_url="https://api.github.com/repos/$REPO_OWNER/$repo/git/refs"
 info "Github Repo URL => $github_repo_url"
 
+#function which returns Data parameters
 generate_post_data()
 {
   cat <<EOF
@@ -85,11 +88,10 @@ generate_post_data()
 }
 EOF
 }
-
-hello=generate_post_data
 info "Data Parameters => $(generate_post_data)"
-info "First Attempt"
-curl_post_response=$(curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" -d "$(generate_post_data)")
+
+#
+curl_post_response=$(curl -s -H "Authorization: token $GITHUB_TOKEN" -d "$(generate_post_data)" $github_repo_url)
 
 info "First Attempt Result $?"
 
