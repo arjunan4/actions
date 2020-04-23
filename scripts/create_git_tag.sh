@@ -90,7 +90,15 @@ post_data()
 EOF
 }
 
-
+generate_post_data()
+{
+  cat <<EOF
+{
+  "ref": "refs/tags/$new_tag_version",
+  "sha": "$commit"
+}
+EOF
+}
 
 # generate_post_data()
 # {
@@ -116,13 +124,13 @@ info "First Attempt result -> $curl_response"
 # output_sha=$(echo "$curl_response" | jq '.object.sha')
 # info "output_sha -> $ref"
 
-info "Second Attempt"
-curl -s -X POST https://api.github.com/repos/$REPO_OWNER/$repo/git/refs \
--H "Authorization: token $GITHUB_TOKEN" \
--d @- << EOF
-{
-  "ref": "refs/tags/$new_tag_version",
-  "sha": "$commit"
-}
-EOF
-info "Second Attempt result $?"
+# info "Second Attempt"
+# curl -s -X POST https://api.github.com/repos/$REPO_OWNER/$repo/git/refs \
+# -H "Authorization: token $GITHUB_TOKEN" \
+# -d @- << EOF
+# {
+#   "ref": "refs/tags/$new_tag_version",
+#   "sha": "$commit"
+# }
+# EOF
+# info "Second Attempt result $?"
