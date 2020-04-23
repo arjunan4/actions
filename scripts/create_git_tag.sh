@@ -99,7 +99,7 @@ info "Git hub token $GITHUB_TOKEN"
 github_repo_url="https://api.github.com/repos/$REPO_OWNER/$repo/git/refs"
 info "Github Repo URL => $github_repo_url"
 
-github_token_params="Authorization: token $GITHUB_TOKEN"
+github_token_params=
 info "Github token parameters => $github_token_params"
 
 tag_hash="{"ref": "refs/tags/$new_tag_version", "sha": "$commit"}"
@@ -119,8 +119,7 @@ info "Git tag_hash $tag_hash"
 # EOF
 
 
-curl -s -X POST $github_repo_url \
--H $github_token_params \
+curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" \
 -d @- << EOF
 {
   "ref": "refs/tags/$new_tag_version",
