@@ -102,7 +102,7 @@ info "Github Repo URL => $github_repo_url"
 github_token_params=
 info "Github token parameters => $github_token_params"
 
-tag_hash="{"ref": "refs/tags/$new_tag_version", "sha": "$commit"}"
+tag_hash={"ref": "refs/tags/$new_tag_version", "sha": "$commit"}
 info "Git tag_hash $tag_hash"
 
 
@@ -139,7 +139,7 @@ info "Third Attempt Result $?"
 
 info "Fourth Attempt"
 curl -s -X POST $github_repo_url -H "Authorization: token $GITHUB_TOKEN" \
--d @- < tag_hash 
+-d $tag_hash 
 
 info "Fourth Attempt Result $?"
 
