@@ -12,14 +12,9 @@ function error {
   echo -e "\033[1;31m$1\033[m" >&2
 }
 
-git config --global user.name "arjunan4"
-hello=$(git branch)
-info "Git Branch ==> $hello"
 # get latest tag
 git fetch --all --tags
 tag=$(git describe --tags `git rev-list --tags --max-count=1`)
-
-info "Git Tag ==> $tag"
 
 if [ -n "$tag" ]; then
     info "Git Tag exists for this repository ==> $tag"
@@ -114,14 +109,12 @@ IFS=$OIFS
 info "Array length ==> ${#ref_split[@]}"
 for i in "${ref_split[@]}"
 do
-  info "$i"
   if [ $i = $new_tag_version ]; then
     info "New Tag Version Committed successfully in remote"
     break
   fi
 done
 
-info "for loop finished"
 sha=$(echo "$curl_response" | jq -r '.object.sha')
 info "sha -> $sha"
 
