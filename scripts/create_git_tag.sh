@@ -116,7 +116,13 @@ EOF
 }
 
 get_github_token()
-{ "Authorization" : "token $GITHUB_TOKEN" }
+{ 
+  cat <<EOF
+  {
+    "Authorization" : "token $GITHUB_TOKEN"
+  }
+EOF
+}
 
 # POST a new ref to repo via Github API
 # curl -s -X POST https://api.github.com/repos/$REPO_OWNER/$repo/git/refs \
