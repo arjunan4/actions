@@ -143,17 +143,10 @@ info "First Attempt Result $?"
 
 info "Curl post response is => $curl_post_response"
 
-# info "Second Attempt"
-# curl -s -X POST $github_repo_url -H "$(token)" -d "$(generate_post_data)"
+ref=$curl_post_response | jq -r '.ref'
 
-# info "Second Attempt Result $?"
+info "Ref -> $ref"
 
-# info "First Attempt"
-# curl -s -X POST $github_repo_url -H "$($token)" -d "$(generate_post_data)"
+sha=$curl_post_response | jq -r '.object.sha'
 
-# info "First Attempt Result $?"
-
-# info "First Attempt"
-# curl -s -X POST $github_repo_url -H "$($token)" -d "$(generate_post_data)"
-
-# info "First Attempt Result $?"
+info "sha -> $sha"
