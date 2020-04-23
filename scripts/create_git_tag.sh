@@ -120,7 +120,7 @@ info "Git tag_hash $tag_hash"
 
 
 curl -s -X POST $github_repo_url \
--H "Authorization: token $GITHUB_TOKEN" \
+-H $github_token_params \
 -d @- << EOF
 {
   "ref": "refs/tags/$new_tag_version",
