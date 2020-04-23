@@ -143,10 +143,10 @@ info "First Attempt Result $?"
 
 info "Curl post response is => $curl_post_response"
 
-# ref=$(echo "$curl_post_response" | jq '.ref')
+ref=$(echo "$curl_post_response" | jq  -r '.ref')
 
-# info "Ref -> $ref"
+info "Ref -> $ref"
 
-# sha=cat $curl_post_response | jq -r '.object.sha'
+sha=$(echo "$curl_post_response" | jq -r '.object.sha')
 
-# info "sha -> $sha"
+info "sha -> $sha"
