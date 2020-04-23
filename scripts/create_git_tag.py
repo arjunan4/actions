@@ -2,6 +2,10 @@
 
 from git import Repo
 import os
+import semver
+import git
+import pycurl
+import StringIO
 
 class CreateGitTags:
 
@@ -22,10 +26,31 @@ class CreateGitTags:
                     tag_list[i] = tag_list[j]
                     tag_list[j] = temp
         print("Git Tag results, after sorting in Descending Order => ", tag_list)
-        print("Required Git tag version", tag_list[0])
-        print("Changing Directory to Original Path")
-        os.chdir('./scripts')
-        print("Changing to python script directories", os.getcwd())
+        print("Current Git tag Version is =>", tag_list[0])
+
+        print("Bumping to new Version")
+        new_tag = str(semver.VersionInfo.parse(tag_list[0]).bump_minor())
+        print("minor bump version is =>", new_tag)
+        print("Verifying New tag version is Valid =>", semver.VersionInfo.isvalid(new_tag))
+        commit_message = "Bumping to " + new_tag + " new tag version"
+        self.git_push(new_tag, commit_message)
+
+    def git_push(self, new_tag, commit_message):
+        print("Git Push with", new_tag, " with commit message =>", commit_message)
+        try:
+            response = StringIO.StringIO()
+            c = pycurl.Curl()
+            c.setopt(c.URL, 'https://api.github.com/repos/$REPO_OWNER/$repo/git/refs')
+            c.setopt(c.WRITEFUNCTION, response.write)
+            c.setopt(c.HTTPHEADER, ['Content-Type: application/json', 'Accept-Charset: UTF-8'])
+            c.setopt(c.POSTFIELDS, '@request.json')
+            c.perform()
+            c.close()
+            print(response.getvalue())
+            response.close()
+        except ValueError as e:
+            print("Some error occured while pushing the code ", e)
+            raise
 
 
 hello = CreateGitTags()
