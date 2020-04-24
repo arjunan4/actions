@@ -3,6 +3,8 @@ name: moduleTests
 Controls when the action will run. Here workflow only
 triggers when a PR is opened, edited against master.
 on:
+  push:
+    branches: [ master ]
   pull_request:
     types: [opened, edited]
     branches: [ master ]
