@@ -5,7 +5,7 @@ triggers when a PR is opened, edited against master.
 on:
   pull_request:
     types: [opened, edited]
-    branches: [master]
+    branches: [ master ]
 
 A workflow run is made up of one or more jobs that can run
 sequentially or in parallel.
