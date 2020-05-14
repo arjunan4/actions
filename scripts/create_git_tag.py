@@ -58,7 +58,6 @@ class CreateGitTags:
         repo = Repo(os.getcwd())
         print(repo.remotes.origin.url)
         # hello = git.Tag.create(repo, "0.3.4")
-        # print(hello)
         # git.Commit.message()
         # repo = Repo(os.getcwd())
         add = repo.remote().add_url('https://github.com/arjunan4/actions.git')
